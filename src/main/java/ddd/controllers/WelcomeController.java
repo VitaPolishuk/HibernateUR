@@ -7,6 +7,8 @@ import ddd.services.RoleService;
 import ddd.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +39,7 @@ public class WelcomeController {
     @RequestMapping(value = "roles", method = RequestMethod.GET)
 
     public String roles(Model model) throws SQLException, ClassNotFoundException {
-          model.addAttribute("listR", new Gson().toJson(roleService.returnListRole()));
+        model.addAttribute("listR", new Gson().toJson(roleService.returnListRole()));
         return "roles";
     }
 
@@ -51,6 +53,73 @@ public class WelcomeController {
         model.addAttribute("listUser", new Gson().toJson(userService.returnListUser()));
         model.addAttribute("listRole", new Gson().toJson(roleService.returnListRole()));
         return "users";
+    }
+
+
+    @RequestMapping(value = "addUserTable", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    ResponseEntity<List<User>> addUserTable(@RequestBody User user) throws SQLException {//PathVariable
+        this.userService.addUser(user);
+
+        return new ResponseEntity<>(this.userService.returnListUser(), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "addRole", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    ResponseEntity<List<Role>> addRole(@RequestBody Role role) throws SQLException {//PathVariable
+        this.roleService.addRole(role);
+
+        return new ResponseEntity<>(this.roleService.returnListRole(), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "selectRole", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    ResponseEntity<List<Role>> selectRole(@RequestBody Role role) throws SQLException {//PathVariable
+
+
+        return new ResponseEntity<>(this.roleService.returnListRole(), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "saveChange", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    ResponseEntity<List<User>> saveChange(@RequestBody User user) throws SQLException {//PathVariable
+        this.userService.changeUser(user);
+
+        return new ResponseEntity<>(this.userService.returnListUser(), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "changeRole", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    ResponseEntity<List<Role>> changeRole(@RequestBody Role role) throws SQLException {//PathVariable
+        System.out.println(role.getId_roles());
+        System.out.println(role.getName_roles());
+        this.roleService.changeRole(role);
+
+        return new ResponseEntity<>(this.roleService.returnListRole(), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "delUser", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    ResponseEntity<List<User>> delUser(@RequestBody User user) throws SQLException {
+        this.userService.deleteUser(user.getId_user());
+
+        return new ResponseEntity<>(this.userService.returnListUser(), HttpStatus.OK);
+    }
+
+
+    @RequestMapping(value = "deleteRole", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    ResponseEntity<List<Role>> deleteRole(@RequestBody Role role) throws SQLException {
+
+        this.roleService.deleteRole(role.getId_roles());
+        return new ResponseEntity<>(this.roleService.returnListRole(), HttpStatus.OK);
     }
 
 }

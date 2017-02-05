@@ -1,5 +1,7 @@
 package ddd.model;
+
 import javax.persistence.*;
+
 @Entity // говорит о том , что данный класс является сущностью
 @Table(name = "users", schema = "usersandroles") // указываем с какой табицей связан
 public class User {

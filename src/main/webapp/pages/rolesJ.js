@@ -1,15 +1,21 @@
-function selectRole(th) {
+function selectRole() {
+    var current = document.getElementById("id_r").value;
     $.ajax({
         type: "POST",
         url: "/selectRole",
         data: JSON.stringify({
-            id_roles: th.value,
+            id_roles: current,
         }),
         contentType: 'application/json',
         mimeType: 'application/json',
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
-            $('#name_roles').val(data.name_roles);
+            templateSelect(data, current);
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].id_roles == current)
+                    $('#name_roles').val(data[i].name_roles);
+            }
+
         }
     })
 }
@@ -19,8 +25,8 @@ function changeRole() {
             type: "POST",
             url: "/changeRole",
             data: JSON.stringify({
-                id_roles: document.getElementById("id_roles").value,
-                name_roles: document.getElementById("name_roles").value,
+                id_roles: document.getElementById("id_r").value,
+                name_roles: document.getElementById("name_roles").value
             }),
 
             dataType: "json",
@@ -28,7 +34,7 @@ function changeRole() {
             mimeType: 'application/json',
             success: function (data, textStatus, jqXHR) {
                 $('#name_roles').val("");
-                templateSelect(data);
+                templateSelect(data, 0);
 
             }
         })
@@ -45,7 +51,7 @@ function addRole() {
             mimeType: 'application/json',
             success: function (data, textStatus, jqXHR) {
                 $('#name_roles').val("");
-                templateSelect(data);
+                templateSelect(data, 0);
             }
         })
     }
@@ -55,23 +61,24 @@ function deleteRole() {
         $.ajax({
             type: "POST",
             url: "/deleteRole",
-            data: JSON.stringify({id_roles: document.getElementById("id_roles").value}),
+            data: JSON.stringify({id_roles: document.getElementById("id_r").value}),
 
             dataType: "json",
             contentType: 'application/json',
             mimeType: 'application/json',
             success: function (data, textStatus, jqXHR) {
                 $('#name_roles').val("");
-                templateSelect(data);
+                templateSelect(data, 0);
             }
         })
     }
 }
-function templateSelect(role) {
+function templateSelect(role, index) {
     var tmpl = document.getElementById('templateSelect').innerHTML.trim();
     tmpl = _.template(tmpl);
     document.getElementById('cont').innerHTML = tmpl({
         listRole: role,
+        index: index
     });
 
 }

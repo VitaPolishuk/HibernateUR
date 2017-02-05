@@ -6,8 +6,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
 @Service("userService")
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private UserDao userDao;
 
@@ -18,7 +19,7 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public void addUser(User user) {
-            this.userDao.addUser(user);
+        this.userDao.addUser(user);
     }
 
     @Override

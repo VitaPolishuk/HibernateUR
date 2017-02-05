@@ -14,7 +14,7 @@
     </script>
     <link rel="stylesheet" href="/pages/styleRole.css" type="text/css"/>
 </head>
-<body onload="templateSelect(listRol)">
+<body onload="templateSelect(listRol,0)">
 <script>
     listRol = ${listR};
 </script>
@@ -35,11 +35,14 @@
     </div>
 </form>
 <script type="text/template" id="templateSelect">
-    <select name="id_roles" id="id_roles" onchange="selectRole(this)">
+    <select name="id_r" id="id_r" onchange="selectRole()">
         <option value="roles" selected>Выберите роль</option>
         {{ for (var j = 0; j < listRole.length; j++) { }}
-        <option value="{{=listRole[j].id_roles}}" text="{{=listRole[j].name_roles}}">{{=listRole[j].name_roles}}
-        </option>
+        {{ if (index!=0 & listRole[j].id_roles==index){ }}
+        <option value="{{=listRole[j].id_roles}}" selected>{{=listRole[j].name_roles}}</option>
+        {{ }else {}}
+        <option value="{{=listRole[j].id_roles}}">{{=listRole[j].name_roles}}</option>
+        {{ } }}
         {{ } }}
     </select>
 </script>

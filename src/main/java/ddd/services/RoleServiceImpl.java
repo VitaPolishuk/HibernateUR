@@ -8,9 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service("roleService")
-public class RoleServiceImpl implements RoleService{
+public class RoleServiceImpl implements RoleService {
 
     private RoleDao roleDao;
+
     public RoleServiceImpl(RoleDao roleDao) {
         this.roleDao = roleDao;
     }
@@ -42,6 +43,6 @@ public class RoleServiceImpl implements RoleService{
     @Override
     @Transactional
     public List<Role> returnListRole() {
-       return this.roleDao.returnListRole();
+        return this.roleDao.returnListRole();
     }
 }

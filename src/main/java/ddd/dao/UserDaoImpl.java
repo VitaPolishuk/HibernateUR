@@ -14,9 +14,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
 @Repository("userDao")
 
-public class UserDaoImpl implements UserDao{
+public class UserDaoImpl implements UserDao {
     private static Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
     private SessionFactory sessionFactory;// будет создавать сессию для создания соединения с БД
 
@@ -43,7 +44,7 @@ public class UserDaoImpl implements UserDao{
     public void deleteUser(int id) {
         Session session = this.sessionFactory.getCurrentSession();
         User user = (User) session.load(User.class, new Integer(id));
-        if(user!=null){
+        if (user != null) {
             session.delete(user);
         }
         logger.info("Пользователь был успешно удален" + user);
@@ -57,28 +58,15 @@ public class UserDaoImpl implements UserDao{
         return user;
     }
 
-  @Transactional
-  public List<User> returnListUser() {
-      @SuppressWarnings("unchecked")
-
-      List<User> listUser = (List<User>) sessionFactory.getCurrentSession()
-              .createCriteria(User.class)
-              .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-
-      return listUser;
-  }
-
-  /*  @Override
-    @SuppressWarnings("unchecked")
+    @Transactional
     public List<User> returnListUser() {
-        System.out.println("зашел в ретурн");
-        Session session = this.sessionFactory.getCurrentSession();
-        List<User> userList = session.createQuery("from ddd.model.User").list();
-        for(User user: userList){
-            logger.info("User list "+ user);
-            System.out.println(user);
-        }
-        return userList;
-    }*/
-    // @Override
+        @SuppressWarnings("unchecked")
+
+        List<User> listUser = (List<User>) sessionFactory.getCurrentSession()
+                .createCriteria(User.class)
+                .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+
+        return listUser;
+    }
+
 }

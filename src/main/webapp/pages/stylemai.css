@@ -1,17 +1,19 @@
-.links{
-    margin : 200px auto;
+.links {
+    margin: 200px auto;
     width: 400px;
 
 }
-.U , .R {
+
+.U, .R {
     display: inline-block;
     margin: 0 auto;
-    padding : 0px 40px 0px 10px ;
+    padding: 0px 40px 0px 10px;
 }
 
 body {
-    background-color: rgba(208,154,21,0.3);
+    background-color: rgba(208, 154, 21, 0.3);
 }
+
 a {
     text-decoration: none; /* Отменяем подчеркивание у ссылки */
     color: #9c5b00

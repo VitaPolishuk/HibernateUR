@@ -1,16 +1,20 @@
-.selectRole, .actions{
+.selectRole, .actions {
     display: inline-block;
     float: left;
 }
-.actions{
+
+.actions {
     padding: 0px 0px 0px 20px;
 }
-.main{
+
+.main {
     width: 800px;
 }
+
 body {
-    background-color: rgba(208,154,21,0.3);
+    background-color: rgba(208, 154, 21, 0.3);
 }
+
 a {
     text-decoration: none; /* Отменяем подчеркивание у ссылки */
     color: #d07e00

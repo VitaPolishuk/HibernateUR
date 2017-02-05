@@ -1,4 +1,5 @@
 package ddd.config;
+
 import java.util.Properties;
 
 import javax.sql.DataSource;
@@ -9,6 +10,7 @@ import ddd.dao.RoleDao;
 import ddd.dao.RoleDaoImpl;
 import ddd.dao.UserDao;
 import ddd.dao.UserDaoImpl;
+import ddd.model.Role;
 import ddd.model.User;
 
 import ddd.services.RoleService;
@@ -50,15 +52,17 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
         converter.setObjectMapper(new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false));
         return converter;
     }
-    @Bean (name = "dataSource")
+
+    @Bean(name = "dataSource")
     public DataSource getdataSource() {
-       BasicDataSource dataSource = new BasicDataSource();
+        BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/usersandroles");
         dataSource.setUsername("root");
         dataSource.setPassword("root");
         return dataSource;
     }
+
     @Autowired
     @Bean(name = "sessionFactory")
     public SessionFactory getSessionFactory(DataSource dataSource) {
@@ -66,9 +70,11 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
         LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
 
         sessionBuilder.addAnnotatedClasses(User.class);
+        sessionBuilder.addAnnotatedClasses(Role.class);
 
         return sessionBuilder.buildSessionFactory();
     }
+
     @Autowired
     @Bean(name = "transactionManager")
     public HibernateTransactionManager getTransactionManager(
@@ -81,7 +87,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 
     @Bean
     public InternalResourceViewResolver setupViewResolver() {
-        InternalResourceViewResolver  resolver =new InternalResourceViewResolver ();
+        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setPrefix("/pages/");
         resolver.setSuffix(".jsp");
         resolver.setViewClass(JstlView.class);
@@ -95,18 +101,21 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 
         return new UserDaoImpl(sessionFactory);
     }
+
     @Autowired
     @Bean(name = "userService")
     public UserService getUserService(UserDao userDao) {
 
         return new UserServiceImpl(userDao);
     }
+
     @Autowired
     @Bean(name = "roleDao")
     public RoleDao getRoleDao(SessionFactory sessionFactory) {
 
         return new RoleDaoImpl(sessionFactory);
     }
+
     @Autowired
     @Bean(name = "roleService")
     public RoleService getRoleService(RoleDao roleDao) {

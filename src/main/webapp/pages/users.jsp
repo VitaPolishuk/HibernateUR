@@ -14,7 +14,7 @@
 
     </style>
 </head>
-<body onload = "templateTable(listUse, listRol); templateSelect(listRol,0)">
+<body onload="templateTable(listUse, listRol); templateSelect(listRol,0)">
 <script>
     listUse = ${listUser};
     listRol = ${listRole};
@@ -62,7 +62,8 @@
 
                 <div class="Add"><input type="button" name="Add" value="Добавить" onclick="addUserTable(listRol)"></div>
 
-                <div class="Save"><input type="button" name="Save" value="Сохранить" onclick="saveChange(listRol)"></div>
+                <div class="Save"><input type="button" name="Save" value="Сохранить" onclick="saveChange(listRol)">
+                </div>
             </div>
         </div>
     </div>
@@ -75,7 +76,7 @@
         {{ if (index!=0 & listRole[j].name_roles==index){ }}
         <option value="{{=listRole[j].id_roles}}" selected>{{=listRole[j].name_roles}}</option>
         {{ }else {}}
-        <option value="{{=listRole[j].id_roles}}" >{{=listRole[j].name_roles}}</option>
+        <option value="{{=listRole[j].id_roles}}">{{=listRole[j].name_roles}}</option>
         {{ } }}
         {{ } }}
     </select>

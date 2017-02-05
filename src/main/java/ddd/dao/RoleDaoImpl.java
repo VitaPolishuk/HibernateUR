@@ -1,23 +1,20 @@
 package ddd.dao;
 
 import ddd.model.Role;
-import ddd.model.User;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
 @Repository("roleDao")
 
-public class RoleDaoImpl implements RoleDao{
+public class RoleDaoImpl implements RoleDao {
     private static Logger logger = LoggerFactory.getLogger(RoleDaoImpl.class);
     private SessionFactory sessionFactory;// будет создавать сессию для создания соединения с БД
 
@@ -43,7 +40,7 @@ public class RoleDaoImpl implements RoleDao{
     public void deleteRole(int id) {
         Session session = this.sessionFactory.getCurrentSession();
         Role role = (Role) session.load(Role.class, new Integer(id));
-        if(role!=null){
+        if (role != null) {
             session.delete(role);
         }
         logger.info("Роль была успешно удалена" + role);

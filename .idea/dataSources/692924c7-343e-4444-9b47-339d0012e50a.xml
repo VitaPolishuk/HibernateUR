@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="usersandroles@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
+    <root id="1"/>
+    <schema id="2" parent="1" name="usersandroles">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="information_schema"/>
+    <schema id="4" parent="1" name="mysql"/>
+    <schema id="5" parent="1" name="performance_schema"/>
+    <schema id="6" parent="1" name="sys"/>
+    <table id="7" parent="2" name="roles"/>
+    <table id="8" parent="2" name="users"/>
+    <column id="9" parent="7" name="id_roles">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="10" parent="7" name="name_roles">
+      <Position>2</Position>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="11" parent="7" name="id_roles_UNIQUE">
+      <ColNames>id_roles</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="12" parent="7" name="PRIMARY">
+      <ColNames>id_roles</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="13" parent="7" name="id_roles_UNIQUE">
+      <ColNames>id_roles</ColNames>
+      <UnderlyingIndexName>id_roles_UNIQUE</UnderlyingIndexName>
+    </key>
+    <column id="14" parent="8" name="id_user">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="15" parent="8" name="name_user">
+      <Position>2</Position>
+      <DataType>varchar(30)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="16" parent="8" name="email">
+      <Position>3</Position>
+      <DataType>varchar(30)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="17" parent="8" name="id_roles">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="18" parent="8" name="id_roles_idx">
+      <ColNames>id_roles</ColNames>
+    </index>
+    <index id="19" parent="8" name="id_user_UNIQUE">
+      <ColNames>id_user</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="20" parent="8" name="name_user_UNIQUE">
+      <ColNames>name_user</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="21" parent="8" name="PRIMARY">
+      <ColNames>id_user</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="22" parent="8" name="id_user_UNIQUE">
+      <ColNames>id_user</ColNames>
+      <UnderlyingIndexName>id_user_UNIQUE</UnderlyingIndexName>
+    </key>
+    <key id="23" parent="8" name="name_user_UNIQUE">
+      <ColNames>name_user</ColNames>
+      <UnderlyingIndexName>name_user_UNIQUE</UnderlyingIndexName>
+    </key>
+    <foreign-key id="24" parent="8" name="id_roles">
+      <ColNames>id_roles</ColNames>
+      <RefSchemaName>usersandroles</RefSchemaName>
+      <RefTableName>roles</RefTableName>
+      <RefColNames>id_roles</RefColNames>
+      <OnUpdate>no-action</OnUpdate>
+      <OnDelete>delete</OnDelete>
+    </foreign-key>
+  </database-model>
+</dataSource>
